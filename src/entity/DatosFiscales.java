@@ -6,19 +6,19 @@ import java.util.Objects;
 @Entity
 @Table(name = "datos_fiscales", schema = "producto-cliente-03052021", catalog = "")
 public class DatosFiscales {
-    private Integer id;
+    private Long id;
     private String rfc;
     private String curp;
-    private Cliente clienteById;
+    private Integer bandera;
+    private Cliente cliente;
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -42,6 +42,16 @@ public class DatosFiscales {
         this.curp = curp;
     }
 
+    @Basic
+    @Column(name = "bandera")
+    public Integer getBandera() {
+        return bandera;
+    }
+
+    public void setBandera(Integer bandera) {
+        this.bandera = bandera;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,21 +59,22 @@ public class DatosFiscales {
         DatosFiscales that = (DatosFiscales) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(rfc, that.rfc) &&
-                Objects.equals(curp, that.curp);
+                Objects.equals(curp, that.curp) &&
+                Objects.equals(bandera, that.bandera);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, rfc, curp);
+        return Objects.hash(id, rfc, curp, bandera);
     }
 
     @OneToOne
     @JoinColumn(name = "id", referencedColumnName = "id", nullable = false)
-    public Cliente getClienteById() {
-        return clienteById;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setClienteById(Cliente clienteById) {
-        this.clienteById = clienteById;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

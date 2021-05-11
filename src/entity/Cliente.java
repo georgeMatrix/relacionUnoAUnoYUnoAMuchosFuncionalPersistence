@@ -5,18 +5,18 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "cliente", schema = "producto-cliente-03052021", catalog = "")
 public class Cliente {
     private Long id;
     private String nombre;
     private String apellido;
     private Integer edad;
     private String email;
-    private DatosFiscales datosFiscalesById;
-    private List<Producto> productosById;
+    private DatosFiscales datosFiscales;
+    private List<Producto> productos;
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -69,12 +69,12 @@ public class Cliente {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Cliente cliente = (Cliente) o;
-        return Objects.equals(id, cliente.id) &&
-                Objects.equals(nombre, cliente.nombre) &&
-                Objects.equals(apellido, cliente.apellido) &&
-                Objects.equals(edad, cliente.edad) &&
-                Objects.equals(email, cliente.email);
+        Cliente that = (Cliente) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(nombre, that.nombre) &&
+                Objects.equals(apellido, that.apellido) &&
+                Objects.equals(edad, that.edad) &&
+                Objects.equals(email, that.email);
     }
 
     @Override
@@ -82,21 +82,21 @@ public class Cliente {
         return Objects.hash(id, nombre, apellido, edad, email);
     }
 
-    @OneToOne(mappedBy = "clienteById")
-    public DatosFiscales getDatosFiscalesById() {
-        return datosFiscalesById;
+    @OneToOne(mappedBy = "cliente")
+    public DatosFiscales getDatosFiscales() {
+        return datosFiscales;
     }
 
-    public void setDatosFiscalesById(DatosFiscales datosFiscalesById) {
-        this.datosFiscalesById = datosFiscalesById;
+    public void setDatosFiscales(DatosFiscales datosFiscales) {
+        this.datosFiscales = datosFiscales;
     }
 
-    @OneToMany(mappedBy = "clienteByIdCliente")
-    public List<Producto> getProductosById() {
-        return productosById;
+    @OneToMany(mappedBy = "cliente")
+    public List<Producto> getProductos() {
+        return productos;
     }
 
-    public void setProductosById(List<Producto> productosById) {
-        this.productosById = productosById;
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
     }
 }

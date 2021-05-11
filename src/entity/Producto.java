@@ -9,7 +9,7 @@ public class Producto {
     private String nombre;
     private String clave;
     private Integer precio;
-    private Cliente clienteByIdCliente;
+    private Cliente cliente;
 
     @Id
     @Column(name = "id")
@@ -69,11 +69,11 @@ public class Producto {
 
     @ManyToOne
     @JoinColumn(name = "id_cliente", referencedColumnName = "id", nullable = false)
-    public Cliente getClienteByIdCliente() {
-        return clienteByIdCliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setClienteByIdCliente(Cliente clienteByIdCliente) {
-        this.clienteByIdCliente = clienteByIdCliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }
